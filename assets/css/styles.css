@@ -23,5 +23,14 @@
 }
 
 .navbar .active {
-  background-color: #000;
+  background-color: #FFF;
+}
+
+.navbar .active a {
+  color: #000;
+}
+
+.navbar .active a:hover {
+  background-color: #FFF;
+  color: #000;
 }
