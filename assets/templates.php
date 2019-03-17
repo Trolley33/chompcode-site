@@ -2,8 +2,8 @@
 $navbar = "
 <div class='navbar'>
   <ul>
-    <li class='active'><a href='/'>Home</a></li>
-    <li><a href='/projects'>Projects</a></li>
+    <li><a href='/'>Home</a></li>
+    <li><a href='/projects/'>Projects</a></li>
   </ul>
 </div>
 ";
@@ -16,3 +16,17 @@ $header = "
   </div>
 </div>
 ";
+?>
+
+<script>
+    $(document).ready(function () {
+        // Set selected navbar element to current path, temporary workaround.
+        $('.navbar li').each(function (i) {
+            var item = $(this);
+
+            if (item.find('a').attr("href") === window.location.pathname) {
+                item.addClass("active");
+            }
+        });
+    });
+</script>
