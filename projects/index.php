@@ -10,9 +10,11 @@
 make_navbar("Projects")
 ?>
 <!-- Main Content -->
-<h1>
-    Project Page!
-</h1>
+<div class="container">
+    <h1>
+        Project page!
+    </h1>
+</div>
 
 <script>
 </script>

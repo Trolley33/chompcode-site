@@ -11,10 +11,11 @@ make_navbar("Home")
 ?>
 
 <!-- Main Content -->
-<h1>
-    Index page!
-</h1>
-
+<div class="container">
+    <h1>
+        Index page!
+    </h1>
+</div>
 <script>
 </script>
 

@@ -7,13 +7,15 @@
 <body>
 <!-- Navbar section -->
 <?php
-make_navbar("Home")
+make_navbar("About Us")
 ?>
 
 <!-- Main Content -->
-<h1>
-    Index page!
-</h1>
+<div class="container">
+    <h1>
+        About page!
+    </h1>
+</div>
 
 <script>
 </script>

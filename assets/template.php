@@ -11,9 +11,11 @@ make_navbar(ACTIVE_NAV_BAR_ELEMENT)
 ?>
 
 <!-- Main Content -->
-<h1>
-
-</h1>
+<div class="container">
+    <h1>
+        
+    </h1>
+</div>
 
 <script>
 </script>
