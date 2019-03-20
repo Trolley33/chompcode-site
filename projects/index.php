@@ -1,13 +1,17 @@
-<html>
+<html lang="">
 <head>
-<?php include('/var/www/html/assets/dependencies.php'); ?>
-<?php include('/var/www/html/assets/templates.php'); ?>
+    <?php include('/var/www/html/assets/dependencies.php'); ?>
+    <?php include('/var/www/html/assets/templates.php'); ?>
+    <title>Projects</title>
 </head>
 <body>
-<?php echo $header; ?>
-<?php echo $navbar; ?>
+<!-- Navbar section -->
+<?php
+make_navbar("Projects")
+?>
+<!-- Main Content -->
 <h1>
-  Project Page!
+    Project Page!
 </h1>
 
 <script>

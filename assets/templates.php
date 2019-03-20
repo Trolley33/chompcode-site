@@ -1,32 +1,40 @@
 <?php
-$navbar = "
-<div class='navbar'>
-  <ul>
-    <li><a href='/'>Home</a></li>
-    <li><a href='/projects/'>Projects</a></li>
-  </ul>
-</div>
-";
 
-$header = "
-<div class='header w3-container w3-dark-grey'>
-  <div class='w3-center'>
-    <h1>Chompcode</h1>
-    <h4>Bite my CSS</h4>
-  </div>
-</div>
-";
+
+function make_navbar($active)
+{
+    // Data for navigation bar.
+    $links =
+        [
+            '/'=>'Home',
+            '/projects'=>'Projects',
+            '/about'=>'About Us'
+        ];
+    // Start open navbar tags.
+    echo '
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">ChompCode</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">';
+
+    // Output navbar info.
+    foreach ($links as $href=>$text)
+    {
+        if ($text == $active) {
+            echo "<li class='nav-item active'>";
+            echo "<a class='nav-link' href='$href'>$text</a>";
+            echo "</li>";
+        }
+        else {
+            echo "<li class='nav-item'>";
+            echo "<a class='nav-link' href='$href'>$text</a>";
+            echo "</li>";
+        }
+    }
+    // Close navbar tags.
+    echo '</ul></div></nav>';
+}
 ?>
-
-<script>
-    $(document).ready(function () {
-        // Set selected navbar element to current path, temporary workaround.
-        $('.navbar li').each(function (i) {
-            var item = $(this);
-
-            if (item.find('a').attr("href") === window.location.pathname) {
-                item.addClass("active");
-            }
-        });
-    });
-</script>

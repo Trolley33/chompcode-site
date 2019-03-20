@@ -1,13 +1,18 @@
-<html>
+<html lang="">
 <head>
-<?php include('/var/www/html/assets/dependencies.php'); ?>
-<?php include('/var/www/html/assets/templates.php'); ?>
+    <?php include('/var/www/html/assets/dependencies.php'); ?>
+    <?php include('/var/www/html/assets/templates.php'); ?>
+    <title>Home</title>
 </head>
 <body>
-<?php echo $header; ?>
-<?php echo $navbar; ?>
+<!-- Navbar section -->
+<?php
+make_navbar("Home")
+?>
+
+<!-- Main Content -->
 <h1>
-  Hey there Johnny!
+    Index page!
 </h1>
 
 <script>
