@@ -2,17 +2,17 @@
 <head>
     <?php include('/var/www/html/assets/dependencies.php'); ?>
     <?php include('/var/www/html/assets/php_functions.php'); ?>
-    <title>Home</title>
+    <title>NAME_OF_PAGE</title>
 </head>
 <body>
 <!-- Navbar section -->
 <?php
-make_navbar("Home")
+make_navbar(ACTIVE_NAV_BAR_ELEMENT)
 ?>
 
 <!-- Main Content -->
 <h1>
-    Index page!
+
 </h1>
 
 <script>
