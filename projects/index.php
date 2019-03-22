@@ -1,6 +1,7 @@
 <html lang="">
 <head>
     <?php include('/var/www/html/assets/dependencies.php'); ?>
+    <?php include('/var/www/html/assets/db.php'); ?>
     <?php include('/var/www/html/assets/php_functions.php'); ?>
     <title>Projects</title>
 </head>
