@@ -12,22 +12,44 @@ make_navbar("Projects");
 ?>
 <!-- Main Content -->
 <div class="container">
-    <div class="row">
-        <div class="col-md-8">
-            <h1 class="my-4">Our Projects</h1>
-    <div class="card mb-4" style="width: 18rem;">
-       <img src="https://i.imgur.com/WkkdraP.png" width='100%' height='180' class="card-img-top" alt="..">
-       <div class="card-body">
-           <h5 class="card-title">Chompcode.com</h5>
-           <p class="card-text">This project is what you're seeing right now! This website was made from scratch by us here at ChompCode. If you want to find out how we did everything, then this is the article for you!</p>
-           <a href="#" class="btn btn-primary">View More</a>
-       </div>
-       <div class="card-footer text-muted">
-           Posted on March 22nd, 2019
-       </div>
-    </div>
-</div>
+<div class="row mt-4">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Project Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Link</th>
+        <th scope="col">Mirror</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php
+      $projects = mysqli_query($link, 'SELECT * FROM projects');
+      while ($row = mysqli_fetch_assoc($projects)) {
+        $name = $row['name'];
+        $desc = $row['description'];
+        $plink = $row['project_link'];
+        $link1 = $row['link_1'];
+        $link2 = $row['link_2'];
+        echo "<tr scope='row'>";
+        echo "<td><a class='btn-link' href='$plink'>$name</td>";
+        echo "<td>$desc</td>";
 
+        if (empty($link1))
+          echo "<td><a class='btn-link'>N/A</a></td>";
+        else
+          echo "<td><a class='btn-link' href='$link1'>Main Link</a></td>";
+        if (empty($link2))
+          echo "<td><a class='btn-link'>N/A</a></td>";
+        else
+          echo "<td><a class='btn-link' href='$link2'>Mirror</a></td>";
+
+        echo "</tr>";
+      }
+      ?>
+    </tbody>
+</div>
+</div>
 <script>
 </script>
 
