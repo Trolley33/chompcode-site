@@ -14,7 +14,7 @@ function make_navbar($active)
     echo '
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="/">
-        <img src="/assets/images/chompcode-small-circle.png" width="50" height="50" alt="" />
+        <img src="/assets/images/chompcode-big-circle.png" width="60" height="60" alt="" />
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
