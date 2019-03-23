@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php
 
 if (!isset($_GET['id']) || empty($_GET['id']))
@@ -20,7 +21,7 @@ $id = $_GET['id'];
     $project = mysqli_fetch_assoc($result);
 
     ?>
-    <title><?php echo $project['name'] ?></title>
+    <title>Viewing - <?php echo $project['name'] ?></title>
 </head>
 <body>
 <!-- Navbar section -->
@@ -29,11 +30,16 @@ make_navbar("Projects");
 ?>
 <!-- Main Content -->
 <div class="container">
-    <div class="row mt-4">
-
+    <div id="content" class="mt-4">
+        <?php echo $project['body']; ?>
     </div>
 </div>
 <script>
+    $(document).ready(function () {
+        $('pre').each(function (i) {
+            hljs.highlightBlock(this);
+        });
+    });
 </script>
 
 </body>
