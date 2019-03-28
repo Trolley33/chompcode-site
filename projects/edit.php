@@ -12,40 +12,55 @@ $id = $_GET['id'];
     <?php require_once('/var/www/html/assets/db.php'); ?>
     <?php require_once('/var/www/html/assets/php_functions.php'); ?>
 
+
     <?php
     $result = mysqli_query($link, "SELECT * FROM projects WHERE id=$id");
 
     if (mysqli_num_rows($result) != 1)
-        header('location: /projects');
+    header('location: /projects');
     $project = mysqli_fetch_assoc($result);
 
     ?>
     <title>Editing - <?php echo $project['name'] ?></title>
+
+    <script>
+        $(document).ready(function () {
+            var options = {
+                modules: {
+                    syntax: true,
+                    toolbar: '#toolbar-container',
+                },
+                placeholder: 'Start a project!',
+                theme: 'snow'
+            };
+
+            var quill = new Quill('#editor-container', options);
+            quill.root.innerHTML = <?php echo json_encode($project['body']); ?>;
+            var project_id = <?php echo $project['id']; ?>;
+
+            var saveAlert = $('#save-success');
+            saveAlert.attr('hidden', null);
+            saveAlert.fadeOut(0);
+
+            $('#save-button').click(function () {
+                var body = quill.root.innerHTML;
+                var name = $('#title-input').val();
+                $.post("/projects/update.php", {id: project_id, name: name, body: body},
+                    function (data) {
+                        $('#save-success a').attr('href', '/projects/view.php?id='+project_id);
+                        $('#save-success a').attr('target', '_blank');
+                        saveAlert.fadeIn();
+                        setTimeout(function () {saveAlert.fadeOut()}, 4000);
+                    });
+            });
+        });
+
+    </script>
 </head>
 <body style="height: 100%;">
 <!-- Navbar section -->
-<?php
-make_navbar("Projects");
-?>
+<?php make_navbar("Projects"); ?>
 
-<!-- Popup section -->
-<div id="project-meta-form" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Edit <?php $project['name'];?> Meta Tags</h5>
-                <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times"></i></button>
-            </div>
-            <div class="modal-body">
-                Test!
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-info"><i class="fas fa-save"></i></button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i></button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Main Content -->
 <div id="standalone-container">
@@ -81,40 +96,24 @@ make_navbar("Projects");
     </div>
 </div>
 
-
-<script>
-    $(document).ready(function () {
-        var options = {
-            modules: {
-                syntax: true,
-                toolbar: '#toolbar-container',
-            },
-            placeholder: 'Start a project!',
-            theme: 'snow'
-        };
-
-        var quill = new Quill('#editor-container', options);
-        quill.root.innerHTML = <?php echo json_encode($project['body']); ?>;
-        var project_id = <?php echo $project['id']; ?>;
-
-        var saveAlert = $('#save-success');
-        saveAlert.attr('hidden', null);
-        saveAlert.fadeOut(0);
-
-        $('#save-button').click(function () {
-            var body = quill.root.innerHTML;
-            var name = $('#title-input').val();
-            $.post("/projects/update.php", {id: project_id, name: name, body: body},
-                function (data) {
-                    $('#save-success a').attr('href', '/projects/view.php?id='+project_id);
-                    $('#save-success a').attr('target', '_blank');
-                    saveAlert.fadeIn();
-                    setTimeout(function () {saveAlert.fadeOut()}, 4000);
-                });
-        });
-    });
-
-</script>
+<!-- Popup section -->
+<div id="project-meta-form" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit <?php $project['name'];?> Meta Tags</h5>
+                <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                Test!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info"><i class="fas fa-save"></i></button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

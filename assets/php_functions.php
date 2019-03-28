@@ -13,14 +13,14 @@ function make_navbar($active)
     // Start open navbar tags.
     echo '
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">
-        <img src="/assets/images/chompcode-big-circle.png" width="60" height="60" alt="" />
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">';
+        <a class="navbar-brand" href="/">
+            <img src="/assets/images/chompcode-big-circle.png" width="60" height="60" alt="" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse order-1" id="navbarNav">
+            <ul class="navbar-nav">';
 
     // Output navbar info.
     foreach ($links as $href=>$text)
@@ -37,7 +37,17 @@ function make_navbar($active)
         }
     }
     // Close navbar tags.
-    echo '</ul></div></nav>';
+    echo '
+            </ul>
+        </div>
+        <div class="navbar-collapse collapse order-3">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="btn btn-outline-info" href="/login">Log In</a>
+                </li>
+            </ul>
+        </div>
+    </nav>';
 }
 
 function make_editor_toolbar() {
