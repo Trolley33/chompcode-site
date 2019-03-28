@@ -94,8 +94,8 @@ function make_admin_navbar($active)
     // Data for navigation bar.
     $links =
         [
-            '/'=>'Home',
-            '/projects'=>'Projects',
+            '/admin'=>'Home',
+            '/admin/projects'=>'Manage Projects',
         ];
     // Start open navbar tags.
     echo '

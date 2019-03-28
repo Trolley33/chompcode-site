@@ -13,10 +13,11 @@ make_public_navbar("Home");
 
 <!-- Main Content -->
 <div class="container">
-    <h1>
-        Index page!
-    </h1>
+    <div id="content" class="mt-4">
+        <h1>Index page</h1>
+    </div>
 </div>
+
 <script>
 </script>
 

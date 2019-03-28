@@ -21,7 +21,7 @@ make_admin_navbar("Home");
 <!-- Main Content -->
 <div class="container">
     <div id="content" class="mt-4">
-        <h1>About us page:</h1>
+        <h1>Admin home</h1>
     </div>
 </div>
 
