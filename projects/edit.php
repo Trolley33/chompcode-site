@@ -107,6 +107,7 @@ make_navbar("Projects");
             $.post("/projects/update.php", {id: project_id, name: name, body: body},
                 function (data) {
                     $('#save-success a').attr('href', '/projects/view.php?id='+project_id);
+                    $('#save-success a').attr('target', '_blank');
                     saveAlert.fadeIn();
                     setTimeout(function () {saveAlert.fadeOut()}, 4000);
                 });
