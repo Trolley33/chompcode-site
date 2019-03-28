@@ -67,6 +67,7 @@ make_navbar("Projects");
     <br />
     <br />
     <!-- Fancy editor -->
+    <?php make_editor_toolbar(); ?>
     <div id="editor-container"></div>
     <button id="save-button" type="button" class="btn btn-lg btn-info" style="border-radius: 35px;">
         <i class="fas fa-save"></i>
@@ -83,31 +84,12 @@ make_navbar("Projects");
 
 <script>
     $(document).ready(function () {
-        var toolbarOptions = [
-            ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-            ['blockquote', 'code-block'],
-
-            [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-            [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-            [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
-
-            [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-
-            [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-            [{ 'font': [] }],
-            [{ 'align': [] }],
-
-            ['clean']
-        ];
-
         var options = {
             modules: {
                 syntax: true,
-                toolbar: toolbarOptions,
+                toolbar: '#toolbar-container',
             },
-            placeholder: 'Compose an epic...',
+            placeholder: 'Start a project!',
             theme: 'snow'
         };
 
