@@ -1,13 +1,14 @@
 <html lang="">
 <head>
     <?php require_once('/var/www/html/assets/dependencies.php'); ?>
+    <?php require_once('/var/www/html/assets/db.php'); ?>
     <?php require_once('/var/www/html/assets/php_functions.php'); ?>
     <title>Home</title>
 </head>
 <body>
 <!-- Navbar section -->
 <?php
-authenticate();
+authenticate($link);
 make_public_navbar("Home");
 ?>
 

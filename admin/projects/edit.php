@@ -1,7 +1,7 @@
 <?php
 
 if (!isset($_GET['id']) || empty($_GET['id']))
-    header('location: /projects');
+    header('location: /admin/projects');
 
 $id = $_GET['id'];
 ?>
@@ -13,7 +13,13 @@ $id = $_GET['id'];
     require_once('/var/www/html/assets/dependencies.php');
     require_once('/var/www/html/assets/db.php');
     require_once('/var/www/html/assets/php_functions.php');
-    authenticate();
+    authenticate($link);
+
+    global $current_user;
+    if (is_null($current_user))
+    {
+        header("Location: " . '/');
+    }
 
     $result = mysqli_query($link, "SELECT * FROM projects WHERE id=$id");
 
@@ -59,7 +65,7 @@ $id = $_GET['id'];
 </head>
 <body style="height: 100%;">
 <!-- Navbar section -->
-<?php make_public_navbar("Projects"); ?>
+<?php make_admin_navbar("Manage Projects"); ?>
 
 
 <!-- Main Content -->

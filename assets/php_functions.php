@@ -2,21 +2,45 @@
 
 $current_user = null;
 
-function authenticate()
+function authenticate($link)
 {
     global $current_user;
     if (isset($_COOKIE['user_token']))
     {
-         $current_user = [
-            'id' => 1,
-            'username' => "trolley33",
-            'password' => 'test'
-        ];
+        $token = mysqli_escape_string($link, $_COOKIE['user_token']);
+        $result = mysqli_query($link, "SELECT * FROM users WHERE token='$token'");
+        if (mysqli_num_rows($result) == 0)
+        {
+            $current_user = null;
+            return;
+        }
+        $current_user = mysqli_fetch_assoc($result);
     }
     else
     {
         $current_user = null;
     }
+}
+
+function find_hash($link, $name)
+{
+    $name = mysqli_escape_string($link, $name);
+    $result = mysqli_query($link, "SELECT id, pass FROM users WHERE username='$name'");
+
+    if (mysqli_num_rows($result) != 1) {
+        header('location: /login?error=notfound');
+        return '';
+    }
+    else {
+
+        return mysqli_fetch_assoc($result)['pass'];
+    }
+}
+
+function set_user_token ($link, $name, $token)
+{
+    $name = mysqli_escape_string($link, $name);
+    mysqli_query($link, "UPDATE users SET token='$token' WHERE username='$name'");
 }
 
 function make_public_navbar($active)

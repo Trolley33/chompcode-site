@@ -6,7 +6,13 @@
     require_once('/var/www/html/assets/dependencies.php');
     require_once('/var/www/html/assets/db.php');
     require_once('/var/www/html/assets/php_functions.php');
-    authenticate();
+    authenticate($link);
+
+    global $current_user;
+    if (is_null($current_user))
+    {
+        header("Location: " . '/');
+    }
     ?>
     <title>Admin</title>
     <!-- -- JS Scripts -- -->

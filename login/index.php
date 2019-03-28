@@ -1,10 +1,11 @@
 <html lang="">
 <head>
     <?php require_once('/var/www/html/assets/dependencies.php'); ?>
+    <?php require_once('/var/www/html/assets/db.php'); ?>
     <?php require_once('/var/www/html/assets/php_functions.php'); ?>
     <title>Log In Now</title>
     <?php
-    authenticate();
+    authenticate($link);
     $back_link = '/';
 
     if (isset($_GET['url']))
@@ -23,11 +24,11 @@
                 <input type="hidden" name="url" value="<?= $back_link ?>">
                 <div class="form-group">
                     <label for="username">Username:</label>
-                    <input type="text" class="form-control" name="username" placeholder="Your Username *" value="" />
+                    <input type="text" class="form-control" name="username" placeholder="Your Username *" value="" required/>
                 </div>
                 <div class="form-group">
                     <label for="password">Password:</label>
-                    <input type="password" class="form-control" name="password" placeholder="Your Password *" value="" />
+                    <input type="password" class="form-control" name="password" placeholder="Your Password *" value="" required/>
                 </div>
                 <div class="form-group">
                     <a href="<?= $back_link ?>" class="btn btn-link float-left"><i class="fas fa-long-arrow-alt-left"></i> Back</a>

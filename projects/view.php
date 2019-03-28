@@ -14,7 +14,7 @@ $id = $_GET['id'];
     require_once('/var/www/html/assets/dependencies.php');
     require_once('/var/www/html/assets/db.php');
     require_once('/var/www/html/assets/php_functions.php');
-    authenticate();
+    authenticate($link);
 
     $result = mysqli_query($link, "SELECT * FROM projects WHERE id=$id");
 
