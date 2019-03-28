@@ -1,14 +1,17 @@
 <html lang="">
 <head>
-    <?php require_once('/var/www/html/assets/dependencies.php'); ?>
-    <?php require_once('/var/www/html/assets/db.php'); ?>
-    <?php require_once('/var/www/html/assets/php_functions.php'); ?>
+    <?php
+    require_once('/var/www/html/assets/dependencies.php');
+    require_once('/var/www/html/assets/db.php');
+    require_once('/var/www/html/assets/php_functions.php');
+    authenticate();
+    ?>
     <title>Projects</title>
 </head>
 <body>
 <!-- Navbar section -->
 <?php
-make_navbar("Projects");
+make_public_navbar("Projects");
 ?>
 <!-- Main Content -->
 <div class="container">

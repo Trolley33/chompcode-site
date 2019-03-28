@@ -7,7 +7,8 @@
 <body>
 <!-- Navbar section -->
 <?php
-make_navbar("Home")
+authenticate();
+make_public_navbar("Home");
 ?>
 
 <!-- Main Content -->

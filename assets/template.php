@@ -7,7 +7,7 @@
 <body>
 <!-- Navbar section -->
 <?php
-make_navbar(ACTIVE_NAV_BAR_ELEMENT)
+make_public_navbar(ACTIVE_NAV_BAR_ELEMENT)
 ?>
 
 <!-- Main Content -->

@@ -9,24 +9,33 @@ $id = $_GET['id'];
 
 <html lang="">
 <head>
-    <?php require_once('/var/www/html/assets/dependencies.php'); ?>
-    <?php require_once('/var/www/html/assets/db.php'); ?>
-    <?php require_once('/var/www/html/assets/php_functions.php'); ?>
-
+    <!-- -- PHP Scripts -- -->
     <?php
+    require_once('/var/www/html/assets/dependencies.php');
+    require_once('/var/www/html/assets/db.php');
+    require_once('/var/www/html/assets/php_functions.php');
+    authenticate();
+
     $result = mysqli_query($link, "SELECT * FROM projects WHERE id=$id");
 
     if (mysqli_num_rows($result) != 1)
         header('location: /projects');
     $project = mysqli_fetch_assoc($result);
-
     ?>
     <title>Viewing - <?php echo $project['name'] ?></title>
+    <!-- -- JS Scripts -- -->
+    <script>
+        $(document).ready(function () {
+            $('pre').each(function (i) {
+                hljs.highlightBlock(this);
+            });
+        });
+    </script>
 </head>
 <body>
 <!-- Navbar section -->
 <?php
-make_navbar("Projects");
+make_public_navbar("Projects");
 ?>
 <!-- Main Content -->
 <div class="container">
@@ -34,13 +43,6 @@ make_navbar("Projects");
         <?php echo $project['body']; ?>
     </div>
 </div>
-<script>
-    $(document).ready(function () {
-        $('pre').each(function (i) {
-            hljs.highlightBlock(this);
-        });
-    });
-</script>
 
 </body>
 </html>

@@ -8,12 +8,13 @@ $id = $_GET['id'];
 <!DOCTYPE html>
 <html lang="" style="height: 100%;">
 <head>
-    <?php require_once('/var/www/html/assets/dependencies.php'); ?>
-    <?php require_once('/var/www/html/assets/db.php'); ?>
-    <?php require_once('/var/www/html/assets/php_functions.php'); ?>
-
-
+    <!-- -- PHP Scripts -- -->
     <?php
+    require_once('/var/www/html/assets/dependencies.php');
+    require_once('/var/www/html/assets/db.php');
+    require_once('/var/www/html/assets/php_functions.php');
+    authenticate();
+
     $result = mysqli_query($link, "SELECT * FROM projects WHERE id=$id");
 
     if (mysqli_num_rows($result) != 1)
@@ -22,7 +23,7 @@ $id = $_GET['id'];
 
     ?>
     <title>Editing - <?php echo $project['name'] ?></title>
-
+    <!-- -- JS Scripts -- -->
     <script>
         $(document).ready(function () {
             var options = {
@@ -54,12 +55,11 @@ $id = $_GET['id'];
                     });
             });
         });
-
     </script>
 </head>
 <body style="height: 100%;">
 <!-- Navbar section -->
-<?php make_navbar("Projects"); ?>
+<?php make_public_navbar("Projects"); ?>
 
 
 <!-- Main Content -->

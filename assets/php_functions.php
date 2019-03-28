@@ -1,7 +1,25 @@
 <?php
 
+$current_user = null;
 
-function make_navbar($active)
+function authenticate()
+{
+    global $current_user;
+    if (isset($_COOKIE['user_token']))
+    {
+         $current_user = [
+            'id' => 1,
+            'username' => "trolley33",
+            'password' => 'test'
+        ];
+    }
+    else
+    {
+        $current_user = null;
+    }
+}
+
+function make_public_navbar($active)
 {
     // Data for navigation bar.
     $links =
@@ -36,14 +54,88 @@ function make_navbar($active)
             echo "</li>";
         }
     }
-    // Close navbar tags.
+    // Close tags.
     echo '
             </ul>
-        </div>
+        </div>';
+    // Display Login button?
+    global $current_user;
+    if (is_null($current_user))
+    {
+        echo '
         <div class="navbar-collapse collapse order-3">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="btn btn-outline-info" href="/login">Log In</a>
+                    <a class="btn btn-info m-1" href="/login?url='. urlencode($_SERVER['REQUEST_URI']) . '">Log In</a>
+                </li>
+            </ul>
+        </div>';
+    }
+    else
+    {
+        echo '
+        <div class="navbar-collapse collapse order-3">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="btn btn-success m-1" href="/admin">Admin</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-danger m-1" href="/logout?url='. urlencode($_SERVER['REQUEST_URI']) . '">Log Out</a>
+                </li>
+            </ul>
+        </div>';
+
+    }
+    echo '</nav>';
+}
+
+function make_admin_navbar($active)
+{
+    // Data for navigation bar.
+    $links =
+        [
+            '/'=>'Home',
+            '/projects'=>'Projects',
+        ];
+    // Start open navbar tags.
+    echo '
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">
+            <img src="/assets/images/chompcode-big-circle.png" width="60" height="60" alt="" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse order-1" id="navbarNav">
+            <ul class="navbar-nav">';
+
+    // Output navbar info.
+    foreach ($links as $href=>$text)
+    {
+        if ($text == $active) {
+            echo "<li class='nav-item active'>";
+            echo "<a class='nav-link' href='$href'>$text</a>";
+            echo "</li>";
+        }
+        else {
+            echo "<li class='nav-item'>";
+            echo "<a class='nav-link' href='$href'>$text</a>";
+            echo "</li>";
+        }
+    }
+    // Close tags.
+    echo '
+            </ul>
+        </div>';
+
+    echo '
+        <div class="navbar-collapse collapse order-3">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="btn btn-success m-1" href="/">Public</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-danger m-1" href="/logout">Log Out</a>
                 </li>
             </ul>
         </div>
@@ -97,4 +189,5 @@ function make_editor_toolbar() {
     </span>
     </div>';
 }
+
 ?>

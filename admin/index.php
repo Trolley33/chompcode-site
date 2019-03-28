@@ -8,7 +8,7 @@
     require_once('/var/www/html/assets/php_functions.php');
     authenticate();
     ?>
-    <title>About Us</title>
+    <title>Admin</title>
     <!-- -- JS Scripts -- -->
     <script>
     </script>
@@ -16,7 +16,7 @@
 <body>
 <!-- Navbar section -->
 <?php
-make_public_navbar("About Us");
+make_admin_navbar("Home");
 ?>
 <!-- Main Content -->
 <div class="container">
