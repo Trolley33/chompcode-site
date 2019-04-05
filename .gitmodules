@@ -1,0 +1,3 @@
+[submodule "purecoat"]
+	path = purecoat
+	url = https://github.com/Trolley33/chompcode-purecoat-data
