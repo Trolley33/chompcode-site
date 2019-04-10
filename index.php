@@ -1,21 +1,24 @@
 <html lang="">
 <head>
-    <?php include('/var/www/html/assets/dependencies.php'); ?>
-    <?php include('/var/www/html/assets/php_functions.php'); ?>
+    <?php require_once('/var/www/html/assets/dependencies.php'); ?>
+    <?php require_once('/var/www/html/assets/db.php'); ?>
+    <?php require_once('/var/www/html/assets/php_functions.php'); ?>
     <title>Home</title>
 </head>
 <body>
 <!-- Navbar section -->
 <?php
-make_navbar("Home")
+authenticate($link);
+make_public_navbar("Home");
 ?>
 
 <!-- Main Content -->
 <div class="container">
-    <h1>
-        Index page!
-    </h1>
+    <div id="content" class="mt-4">
+        <h1>Index page</h1>
+    </div>
 </div>
+
 <script>
 </script>
 

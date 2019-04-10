@@ -1,24 +1,29 @@
+<!DOCTYPE html>
 <html lang="">
 <head>
-    <?php include('/var/www/html/assets/dependencies.php'); ?>
-    <?php include('/var/www/html/assets/php_functions.php'); ?>
-    <title>Home</title>
+    <!-- -- PHP Scripts -- -->
+    <?php
+    require_once('/var/www/html/assets/dependencies.php');
+    require_once('/var/www/html/assets/db.php');
+    require_once('/var/www/html/assets/php_functions.php');
+    authenticate($link);
+    ?>
+    <title>About Us</title>
+    <!-- -- JS Scripts -- -->
+    <script>
+    </script>
 </head>
 <body>
 <!-- Navbar section -->
 <?php
-make_navbar("About Us")
+make_public_navbar("About Us");
 ?>
-
 <!-- Main Content -->
 <div class="container">
-    <h1>
-        About page!
-    </h1>
+    <div id="content" class="mt-4">
+        <h1>About us page:</h1>
+    </div>
 </div>
-
-<script>
-</script>
 
 </body>
 </html>
