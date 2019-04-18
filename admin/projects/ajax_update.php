@@ -40,6 +40,6 @@ function get_url ($url) {
         return $url;
     if (strstr($url, 'http:') || strstr($url, '//'))
         return $url;
-    
+
     return '//' . $url;
 }

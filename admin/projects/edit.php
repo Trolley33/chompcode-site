@@ -54,6 +54,7 @@ $id = $_GET['id'];
             saveAlert.fadeOut(0);
 
             $('.save-button').click(ajax_save);
+            $('#delete-button').click(ajax_delete);
         });
 
         function ajax_save() {
@@ -89,6 +90,22 @@ $id = $_GET['id'];
                 },
             });
         }
+
+        function ajax_delete() {
+
+            data = {
+                id: project_id,
+                token: user_token,
+            };
+
+            $.post({
+                url: "/admin/projects/ajax_delete.php",
+                data: data,
+                success: function (data) {
+                    window.location.replace('/admin/projects?deleted=1');
+                },
+            });
+        }
     </script>
 </head>
 <body style="height: 100%;">
@@ -109,7 +126,7 @@ $id = $_GET['id'];
         <div class="p-2 float-right">
             <div class="btn-group" role="group">
                 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#project-meta-form"><i class="fas fa-pencil-alt"></i></button>
-                <button type="button" class="btn btn-secondary"><i class="fas fa-trash-alt"></i></button>
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#project-delete-form"><i class="fas fa-trash-alt"></i></button>
             </div>
         </div>
     </div>
@@ -130,7 +147,7 @@ $id = $_GET['id'];
     </div>
 </div>
 
-<!-- Popup section -->
+<!-- Edit modal-->
 <div id="project-meta-form" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -153,6 +170,25 @@ $id = $_GET['id'];
             <div class="modal-footer">
                 <button type="button" class="btn btn-info save-button" data-dismiss="modal"><i class="fas fa-save"></i></button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete modal-->
+<div id="project-delete-form" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Really Delete this Project?</h5>
+                <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                This action cannot be undone.
+            </div>
+            <div class="modal-footer">
+                <button id="delete-button" type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>
