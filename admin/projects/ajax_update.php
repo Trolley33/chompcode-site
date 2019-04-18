@@ -1,7 +1,7 @@
 <?php
 if (!isset($_POST['id']) || !isset($_POST['name']) || !isset($_POST['body']) || !isset($_POST['desc']) || !isset($_POST['link_1']) || !isset($_POST['link_2']) || !isset($_POST['token'])):
     header('location: /projects');
-    die;
+    exit(1);
 endif;
 
 require_once('/var/www/html/assets/db.php');
@@ -23,7 +23,7 @@ $token_result = mysqli_query($link, $token_query);
 
 if ($token_result->num_rows == 0):
     header('location: /projects');
-    die;
+    exit(1);
 endif;
 
 $update_query = "
