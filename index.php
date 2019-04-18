@@ -14,9 +14,13 @@ make_public_navbar("Home");
 
 <!-- Main Content -->
 <div class="container">
-    <div id="content" class="mt-4">
-        <h1>Index page</h1>
-    </div>
+    <?php
+    $projects = get_projects($link, 'created_at', 'desc');
+
+    foreach ($projects as $project) {
+        make_project_card($project);
+    }
+    ?>
 </div>
 
 <script>

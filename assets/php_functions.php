@@ -122,7 +122,7 @@ function make_admin_navbar($active)
             '/admin/projects'=>'Manage Projects',
         ];
     // Start open navbar tags.
-    echo '
+    ?>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <a class="navbar-brand" href="/">
             <img src="/assets/images/chompcode-big-circle.png" width="60" height="60" alt="" />
@@ -131,7 +131,8 @@ function make_admin_navbar($active)
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse order-1" id="navbarNav">
-            <ul class="navbar-nav">';
+            <ul class="navbar-nav">
+    <?php
 
     // Output navbar info.
     foreach ($links as $href=>$text)
@@ -148,11 +149,10 @@ function make_admin_navbar($active)
         }
     }
     // Close tags.
-    echo '
+    ?>
             </ul>
-        </div>';
+        </div>
 
-    echo '
         <div class="navbar-collapse collapse order-3">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
@@ -163,11 +163,13 @@ function make_admin_navbar($active)
                 </li>
             </ul>
         </div>
-    </nav>';
+    </nav>
+    <?php
 }
 
 function make_editor_toolbar() {
-    echo '<div id="toolbar-container">
+    ?>
+    <div id="toolbar-container">
     <span class="ql-formats">
     <select class="ql-font"></select>
     <select class="ql-size"></select>
@@ -211,7 +213,48 @@ function make_editor_toolbar() {
     <span class="ql-formats">
     <button class="ql-clean"></button>
     </span>
-    </div>';
+    </div>
+
+    <?php
 }
+
+function get_projects($link, $order_by = 'created_at', $order='DESC') {
+    $query = "SELECT * FROM projects ORDER BY $order_by $order";
+    $results = mysqli_query($link, $query);
+
+    $projects = [];
+    while ($row = $results->fetch_assoc()) {
+        $project = $row;
+        $project['body'] = strip_tags(substr($project['body'], 0, 125))."...";
+        array_push($projects, $project);
+    }
+    return $projects;
+
+}
+
+function make_project_card($project) {
+    $id = $project['id'];
+    $title = $project['name'];
+    $body = $project['body'];
+    $created_date = date_create($project['created_at']);
+    $created = date_format($created_date, "F dS Y");
+
+    echo "
+    <div class='m-4 float-left'>
+        <div class='card' style='width: 18rem;'>
+            <div class='card-body'>
+                <h4 class='card-title'>$title</h4>
+                <hr />
+                $body
+            </div>
+            <div class='card-footer'>
+                <span class='text-muted float-left'>$created</span>
+                <a href='/projects/view.php?id=$id' class='btn btn-link float-right'>View More</a>
+            </div>
+        </div>
+    </div>
+    ";
+}
+
 
 ?>
