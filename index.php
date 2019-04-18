@@ -15,10 +15,10 @@ make_public_navbar("Home");
 <!-- Main Content -->
 <div class="container">
     <?php
-    $projects = get_projects($link, 'updated_at', 'desc');
+    $projects = get_projects($link, 'created_at', 'desc');
 
     foreach ($projects as $project) {
-        make_card($project['id'], $project['name'], $project['body']);
+        make_project_card($project);
     }
     ?>
 </div>
