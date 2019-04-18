@@ -122,7 +122,7 @@ function make_admin_navbar($active)
             '/admin/projects'=>'Manage Projects',
         ];
     // Start open navbar tags.
-    echo '
+    ?>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <a class="navbar-brand" href="/">
             <img src="/assets/images/chompcode-big-circle.png" width="60" height="60" alt="" />
@@ -131,7 +131,8 @@ function make_admin_navbar($active)
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse order-1" id="navbarNav">
-            <ul class="navbar-nav">';
+            <ul class="navbar-nav">
+    <?php
 
     // Output navbar info.
     foreach ($links as $href=>$text)
@@ -148,11 +149,10 @@ function make_admin_navbar($active)
         }
     }
     // Close tags.
-    echo '
+    ?>
             </ul>
-        </div>';
+        </div>
 
-    echo '
         <div class="navbar-collapse collapse order-3">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
