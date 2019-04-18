@@ -33,6 +33,7 @@ $id = $_GET['id'];
     <script>
         var quill;
         var project_id;
+        var user_token = <?= json_encode($current_user['token']); ?>;
 
         $(document).ready(function () {
             let options = {
@@ -68,11 +69,12 @@ $id = $_GET['id'];
                 body: body,
                 desc: desc,
                 link_1: link_1,
-                link_2: link_2
+                link_2: link_2,
+                token: user_token,
             };
 
             $.post({
-                url: "/projects/update.php",
+                url: "/admin/projects/ajax_update.php",
                 data: data,
                 success: function (data) {
                     let save_anchor = $('#save-success a');
