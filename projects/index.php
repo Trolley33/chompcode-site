@@ -23,6 +23,7 @@ make_public_navbar("Projects");
         <th scope="col">Description</th>
         <th scope="col">Link</th>
         <th scope="col">Mirror</th>
+        <th scope="col">Created At</th>
       </tr>
     </thead>
     <tbody>
@@ -34,6 +35,10 @@ make_public_navbar("Projects");
         $desc = $row['description'];
         $link1 = $row['link_1'];
         $link2 = $row['link_2'];
+
+        $created_date = date_create($row['created_at']);
+        $created = date_format($created_date, "Y/m/d");
+
         echo "<tr scope='row'>";
         echo "<td><a class='btn-link' href='/projects/view.php?id=$id'>$name</td>";
         echo "<td>$desc</td>";
@@ -47,6 +52,7 @@ make_public_navbar("Projects");
         else
           echo "<td><a class='btn-link' href='$link2'>Mirror</a></td>";
 
+        echo "<td>$created</td>";
         echo "</tr>";
       }
       ?>
