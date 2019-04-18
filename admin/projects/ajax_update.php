@@ -28,7 +28,8 @@ endif;
 
 $update_query = "
     UPDATE projects
-    SET name='$name', body='$body', description='$desc', link_1='$url_1', link_2='$url_2'
+    SET name='$name', body='$body', description='$desc', link_1='$url_1', link_2='$url_2',
+        updated_at=CURRENT_TIME()
     WHERE id=$id;
 ";
 
