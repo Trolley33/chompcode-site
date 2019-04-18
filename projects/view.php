@@ -40,6 +40,7 @@ make_public_navbar("Projects");
 <!-- Main Content -->
 <div class="container">
     <div id="content" class="mt-4">
+        <h1><u><?php echo $project['name']; ?></u></h1>
         <?php echo $project['body']; ?>
     </div>
 </div>

@@ -29,13 +29,13 @@ make_public_navbar("Projects");
       <?php
       $projects = mysqli_query($link, 'SELECT * FROM projects');
       while ($row = mysqli_fetch_assoc($projects)) {
+        $id = $row['id'];
         $name = $row['name'];
         $desc = $row['description'];
-        $plink = $row['project_link'];
         $link1 = $row['link_1'];
         $link2 = $row['link_2'];
         echo "<tr scope='row'>";
-        echo "<td><a class='btn-link' href='$plink'>$name</td>";
+        echo "<td><a class='btn-link' href='/projects/view.php?id=$id'>$name</td>";
         echo "<td>$desc</td>";
 
         if (empty($link1))

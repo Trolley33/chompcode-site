@@ -163,11 +163,13 @@ function make_admin_navbar($active)
                 </li>
             </ul>
         </div>
-    </nav>';
+    </nav>
+    <?php
 }
 
 function make_editor_toolbar() {
-    echo '<div id="toolbar-container">
+    ?>
+    <div id="toolbar-container">
     <span class="ql-formats">
     <select class="ql-font"></select>
     <select class="ql-size"></select>
@@ -211,7 +213,43 @@ function make_editor_toolbar() {
     <span class="ql-formats">
     <button class="ql-clean"></button>
     </span>
-    </div>';
+    </div>
+
+    <?php
 }
+
+function get_projects($link, $order_by = 'created_at', $order='DESC') {
+    $query = "SELECT * FROM projects ORDER BY $order_by $order";
+    $results = mysqli_query($link, $query);
+
+    $projects = [];
+    while ($row = $results->fetch_assoc()) {
+        $project = [];
+        $project = $row;
+        $project['body'] = strip_tags(substr($project['body'], 0, 125))."...";
+        array_push($projects, $project);
+    }
+    return $projects;
+
+}
+
+function make_card($id, $title, $body) {
+    echo "
+    
+    <div class='m-4 float-left'>
+        <div class='card' style='width: 18rem;'>
+            <div class='card-body'>
+                <h4 class='card-title'>$title</h4>
+                <hr />
+                $body
+            </div>
+            <div class='card-footer'>
+                <a href='/projects/view.php?id=$id' class='btn btn-link float-right'>View More</a>
+            </div>
+        </div>
+    </div>
+    ";
+}
+
 
 ?>
