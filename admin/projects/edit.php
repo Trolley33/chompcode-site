@@ -31,8 +31,11 @@ $id = $_GET['id'];
     <title>Editing - <?php echo $project['name'] ?></title>
     <!-- -- JS Scripts -- -->
     <script>
+        var quill;
+        var project_id;
+
         $(document).ready(function () {
-            var options = {
+            let options = {
                 modules: {
                     syntax: true,
                     toolbar: '#toolbar-container',
@@ -41,26 +44,49 @@ $id = $_GET['id'];
                 theme: 'snow'
             };
 
-            var quill = new Quill('#editor-container', options);
+            quill = new Quill('#editor-container', options);
             quill.root.innerHTML = <?php echo json_encode($project['body']); ?>;
-            var project_id = <?php echo $project['id']; ?>;
+            project_id = <?php echo $project['id']; ?>;
 
-            var saveAlert = $('#save-success');
+            let saveAlert = $('#save-success');
             saveAlert.attr('hidden', null);
             saveAlert.fadeOut(0);
 
-            $('#save-button').click(function () {
-                var body = quill.root.innerHTML;
-                var name = $('#title-input').val();
-                $.post("/projects/update.php", {id: project_id, name: name, body: body},
-                    function (data) {
-                        $('#save-success a').attr('href', '/projects/view.php?id='+project_id);
-                        $('#save-success a').attr('target', '_blank');
-                        saveAlert.fadeIn();
-                        setTimeout(function () {saveAlert.fadeOut()}, 4000);
-                    });
-            });
+            $('.save-button').click(ajax_save);
         });
+
+        function ajax_save() {
+            let name = $('#title-input').val();
+            let body = quill.root.innerHTML;
+            let desc = $('#description-input').val();
+            let link_1 = $('#link1-input').val();
+            let link_2 = $('#link2-input').val();
+
+            data = {
+                id: project_id,
+                name: name,
+                body: body,
+                desc: desc,
+                link_1: link_1,
+                link_2: link_2
+            };
+
+            $.post({
+                url: "/projects/update.php",
+                data: data,
+                success: function (data) {
+                    let save_anchor = $('#save-success a');
+                    save_anchor.attr('href', '/projects/view.php?id=' + project_id);
+                    save_anchor.attr('target', '_blank');
+
+                    let save_modal = $('#save-success');
+                    save_modal.fadeIn();
+                    setTimeout(function () {
+                        save_modal.fadeOut()
+                    }, 4000);
+                },
+            });
+        }
     </script>
 </head>
 <body style="height: 100%;">
@@ -74,7 +100,7 @@ $id = $_GET['id'];
     <div class="p-2">
         <div class="p-2 float-left">
             <form class="form-inline">
-                <label class="font-weight-bold pr-3" for="title-input">Post Title: </label>
+                <label class="font-weight-bold pr-3" for="title-input">Project Title: </label>
                 <input type="text" class="form-control" id="title-input" placeholder="Enter Title" value="<?php echo $project['name']; ?>"/>
             </form>
         </div>
@@ -90,7 +116,7 @@ $id = $_GET['id'];
     <!-- Fancy editor -->
     <?php make_editor_toolbar(); ?>
     <div id="editor-container"></div>
-    <button id="save-button" type="button" class="btn btn-lg btn-info" style="border-radius: 35px;">
+    <button type="button" class="btn btn-lg btn-info save-button floating-bottom-right" style="border-radius: 35px;">
         <i class="fas fa-save"></i>
     </button>
     <div id="save-success" class="alert alert-success" role="alert" hidden>
@@ -107,14 +133,23 @@ $id = $_GET['id'];
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Edit <?php $project['name'];?> Meta Tags</h5>
+                <h5 class="modal-title">Edit Project Meta Tags</h5>
                 <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times"></i></button>
             </div>
             <div class="modal-body">
-                Test!
+                <form class="form">
+                    <label class="font-weight-bold pr-3" for="description-input">Project Description: </label><br/>
+                    <textarea class="form-control" id="description-input" placeholder="A short description"><?php echo $project['description']; ?></textarea>
+                    <br/>
+                    <label class="font-weight-bold pr-3" for="link1-input">Project Link #1: </label><br/>
+                    <input type="url" class="form-control" id="link1-input" placeholder="A link to the project web page/download." value="<?php echo $project['link_1']; ?>"/>
+                    <br/>
+                    <label class="font-weight-bold pr-3" for="link2-input">Project Link #2: </label><br/>
+                    <input type="url" class="form-control" id="link2-input" placeholder="A mirror link to the project web page/download." value="<?php echo $project['link_2']; ?>"/>
+                </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-info"><i class="fas fa-save"></i></button>
+                <button type="button" class="btn btn-info save-button" data-dismiss="modal"><i class="fas fa-save"></i></button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i></button>
             </div>
         </div>
