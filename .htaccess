@@ -1,11 +1,8 @@
 ErrorDocument 403 /errors/403-forbidden.html
 
-<Files "config.php">
-        Order Deny,Allow
-        Deny from all
-        Allow from localhost
-        Allow from 127.0.0.1
-     Allow from xxx.yyy.zzz.aaa
-</Files>
+<FilesMatch "\.(ini|psd|log|sh)$">
+Order allow,deny
+Deny from all 
+</FilesMatch>
 
 Options -Indexes
