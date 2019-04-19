@@ -148,7 +148,7 @@ $id = $_GET['id'];
 </div>
 
 <!-- Edit modal-->
-<div id="project-meta-form" class="modal" tabindex="-1" role="dialog">
+<div id="project-meta-form" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -176,7 +176,7 @@ $id = $_GET['id'];
 </div>
 
 <!-- Delete modal-->
-<div id="project-delete-form" class="modal" tabindex="-1" role="dialog">
+<div id="project-delete-form" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
