@@ -225,7 +225,6 @@ function get_projects($link, $order_by = 'created_at', $order='DESC') {
     $projects = [];
     while ($row = $results->fetch_assoc()) {
         $project = $row;
-        $project['body'] = strip_tags(substr($project['body'], 0, 125))."...";
         array_push($projects, $project);
     }
     return $projects;
@@ -235,24 +234,22 @@ function get_projects($link, $order_by = 'created_at', $order='DESC') {
 function make_project_card($project) {
     $id = $project['id'];
     $title = $project['name'];
-    $body = $project['body'];
+    $body = substr($project['body'], 0, 125)."...";
     $created_date = date_create($project['created_at']);
     $created = date_format($created_date, "F dS Y");
 
     echo "
-    <div class='m-4 float-left'>
-        <div class='card' style='width: 18rem;'>
+        <div class='card m-4 col'>
             <div class='card-body'>
                 <h4 class='card-title'>$title</h4>
                 <hr />
                 $body
             </div>
             <div class='card-footer'>
-                <span class='text-muted float-left'>$created</span>
-                <a href='/projects/view.php?id=$id' class='btn btn-link float-right'>View More</a>
+                <div class='text-muted float-left'>$created</div>
+                <a href='/projects/view.php?id=$id' class='float-right btn-link'>View More</a>
             </div>
         </div>
-    </div>
     ";
 }
 

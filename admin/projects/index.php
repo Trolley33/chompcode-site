@@ -13,6 +13,25 @@
     }
     ?>
     <title>Projects</title>
+    <script>
+        $(document).ready(function () {
+            var token = <?php echo json_encode($current_user['token']); ?>;
+
+            $('#submit-button').click(function() {
+                let title = $('#project-title-input').val();
+                data = {
+                    name: title,
+                    token: token,
+                }
+                $.post({
+                    url: '/admin/projects/ajax_create.php',
+                    data: data,
+                    success: function(data) {window.location.href = "/admin/projects/edit.php?id="+data;},
+                    error: function(data) {},
+                });   
+            });
+        });
+    </script>
 </head>
 <body>
 <!-- Navbar section -->
@@ -48,10 +67,35 @@ make_admin_navbar("Manage Projects");
             }
             ?>
             </tbody>
+        </table>
+        <div style="margin: auto;">
+            <button type="button" class="btn btn-circle btn-lg btn-info" data-toggle="modal" data-target="#new-project-modal">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
     </div>
 </div>
-<script>
-</script>
 
+<!-- Modal -->
+<div class="modal fade" id="new-project-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Enter New Project Title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label for="project-title" class="col-form-label">Title:</label>
+        <input type="text" class="form-control" id="project-title-input">
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="submit-button" class="btn btn-info">Submit</button>  
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
