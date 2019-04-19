@@ -248,8 +248,8 @@ function make_project_card($project) {
                 $body
             </div>
             <div class='card-footer'>
-                <span class='text-muted float-left'>$created</span>
-                <a href='/projects/view.php?id=$id' class='btn btn-link float-right'>View More</a>
+                <div class='text-muted float-left'>$created</div>
+                <a href='/projects/view.php?id=$id' class='float-right btn-link'>View More</a>
             </div>
         </div>
     </div>
